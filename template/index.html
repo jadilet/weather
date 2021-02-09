@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Weather</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/index.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="weather-side">
+            <div class="weather-gradient"></div>
+            <div class="date-container">
+                <h2 class="date-dayname">{{.Weekday}}</h2><span class="date-day">{{.Date}}</span><i class="location-icon"
+                    data-feather="map-pin"></i><span class="location">{{.City}}</span>
+            </div>
+            <div class="weather-container"><i class="weather-icon" data-feather="sun"></i>
+                <h1 class="weather-temp">{{ .TheTemp }}°C</h1>
+                <h3 class="weather-desc"> {{ .WeatherStateName }}</h3>
+            </div>
+        </div>
+        <div class="info-side">
+            <div class="today-info-container">
+                <div class="today-info">
+                    <div class="precipitation"> <span class="title">PREDICABILITY</span><span class="value">{{.Predictability}} %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="humidity"> <span class="title">HUMIDITY</span><span class="value">{{.Humidity}} %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wind"> <span class="title">WIND</span><span class="value">{{.WindSpeed}} km/h</span>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-container">
+                <ul class="week-list">
+                    {{ with .Arr }}
+                        {{ range . }}
+                        <li><i class="day-icon" data-feather="sun"><img class="day-icon" src="{{ .IconURL}}"></img></i><span class="day-name">{{ .WeekdayAbbr }}</span><span
+                                class="day-temp">{{ .TheTemp }}°C</span></li>
+                        {{ end }}
+                    {{ end }}
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="location-container">
+                <button class="location-button" onclick="openSearch()"> <i data-feather="map-pin"></i><span>Change
+                        location</span></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="myOverlay" class="overlay">
+        <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+        <div class="overlay-content">
+            <form action="/">
+                <input type="text" placeholder="Search City..." name="search">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
