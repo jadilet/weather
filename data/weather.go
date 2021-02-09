@@ -15,7 +15,7 @@ func GetWeatherByCity(city string) (*api.QueryResponse, error) {
 	qr, err = mw.GetWeather(city)
 
 	if err != nil {
-		return qr, err
+		return nil, err
 	}
 
 	return qr, nil
